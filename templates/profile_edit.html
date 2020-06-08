@@ -1,0 +1,22 @@
+{% extends 'profile.html' %}
+
+{% block edit_profile %}
+    <form method="POST" class="mt-24">
+        {% csrf_token %}
+
+        <h2 class="text-2xl text-black">Edit Profile</h2>
+        <hr>
+
+        <div class="w-full flex items-center border-b border-b-2 border-black py-2 my-6">
+            <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" id="bio" name="bio" type="text" placeholder="Bio" value="{{ user.profile.bio }}">
+        </div>
+
+        <div class="w-full flex items-center border-b border-b-2 border-black py-2 mb-12">
+            <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" id="image" name="image" type="url" placeholder="Avatar URL" value="{{ user.profile.image }}">
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="border border-black duration-200 hover:bg-black hover:text-white hover:underline px-4 py-2 transition-all">Update Profile</button>
+        </div>
+    </form>
+{% endblock %}

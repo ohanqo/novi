@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     path('', include('NoviApps.Articles.urls')),
     path('', include('NoviApps.Authentication.urls')),
+    path('', include('NoviApps.Profiles.urls')),
 ]

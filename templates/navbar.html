@@ -4,11 +4,14 @@
 
     {% if user.is_authenticated %}
         <div class="flex-1 text-right relative">
-            <p @click="isMenuOpen = !isMenuOpen" class="cursor-pointer">{{ user.username }}</p>
+            <p @click="isMenuOpen = !isMenuOpen" class="cursor-pointer flex items-center justify-end">
+                {{ user.username }}
+                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
+            </p>
 
             <button v-if="isMenuOpen" @click="isMenuOpen = false" tabindex="-1" class="fixed inset-0 h-full w-full bg-black opacity-25 cursor-default"></button>
             <nav :class="isMenuOpen ? 'block' : 'hidden'" class="absolute bg-white block mt-2 pl-2 py-4 right-0 rounded w-40 z-10">
-                <a href="#" class="block text-lg py-2 text-left hover:underline">Profile</a>
+                <a href="/profile/{{ user.id }}" class="block text-lg py-2 text-left hover:underline">Profile</a>
                 <a href="/logout" class="block text-lg py-2 text-left hover:underline">Logout</a>
             </nav>
         </div>
