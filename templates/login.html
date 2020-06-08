@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include "navbar.html" %}
+
+    <section class="w-full max-w-lg flex flex-col mx-auto pt-24">
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="w-full mb-6 flex items-center border-b border-b-2 border-black py-2">
+                <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" id="username" name="username" type="text" placeholder="Username">
+                {% comment %} <p class="text-red-500 text-xs italic">Please fill out this field.</p> {% endcomment %}
+            </div>
+
+            <div class="w-full mb-12 flex items-center border-b border-b-2 border-black py-2">
+                <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" id="password" name="password" type="password" placeholder="Password">
+                {% comment %} <p class="text-red-500 text-xs italic">Please fill out this field.</p> {% endcomment %}
+            </div>
+
+            <div class="text-center">
+                <button class="border border-black duration-200 hover:bg-black hover:text-white hover:underline px-4 py-2 transition-all">Log in!</button>
+            </div>
+        </form>
+
+        <hr class="my-12 w-32 mx-auto">
+
+        <p class="text-center">Does not have an account? Click <a class="underline" href="/register">here</a> to create one.</p>
+    </section>
+
+{% endblock %}

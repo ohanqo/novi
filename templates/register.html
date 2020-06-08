@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include "navbar.html" %}
+
+    <section class="w-full max-w-lg flex flex-col mx-auto pt-24">
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="w-full mb-6 flex items-center border-b border-b-2 border-black py-2">
+                <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" id="username" name="username" type="text" placeholder="Username" autofocus required>
+                {% comment %} <p class="text-red-500 text-xs italic">Please fill out this field.</p> {% endcomment %}
+            </div>
+            
+            <div class="w-full mb-6 flex items-center border-b border-b-2 border-black py-2">
+                <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" id="email" name="email" type="email" placeholder="Email" required>
+                {% comment %} <p class="text-red-500 text-xs italic">Please fill out this field.</p> {% endcomment %}
+            </div>
+
+            <div class="w-full mb-6 flex items-center border-b border-b-2 border-black py-2">
+                <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" id="password1" name="password1" type="password" placeholder="Password" required>
+                {% comment %} <p class="text-red-500 text-xs italic">Please fill out this field.</p> {% endcomment %}
+            </div>
+
+            <div class="w-full mb-12 flex items-center border-b border-b-2 border-black py-2">
+                <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" id="password2" name="password2" type="password" placeholder="Password Confirmation" required>
+                {% comment %} <p class="text-red-500 text-xs italic">Please fill out this field.</p> {% endcomment %}
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="border border-black duration-200 hover:bg-black hover:text-white hover:underline px-4 py-2 transition-all">Register now!</button>
+            </div>
+        </form>
+
+        <hr class="my-12 w-32 mx-auto">
+
+        <p class="text-center">Already an account? Click <a class="underline" href="/login">here</a> to connect.</p>
+    </section>
+
+{% endblock %}

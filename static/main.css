@@ -1,0 +1,37 @@
+@tailwind base;
+
+@tailwind components;
+
+@font-face {
+  font-family: "Orpheus";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("./assets/fonts/Orpheus-Pro.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Orpheus";
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: url("./assets/fonts/Orpheus-Pro-Italic.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Orpheus";
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url("./assets/fonts/Orpheus-Pro-Medium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Orpheus";
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("./assets/fonts/Orpheus-Pro-Bold.otf") format("opentype");
+}
+
+@tailwind utilities;
