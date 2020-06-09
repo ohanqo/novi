@@ -51,7 +51,7 @@ def connect(request):
                 errors.append('Invalid password or email.')
 
         else:
-            errors = form.error_messages
+            errors = errors.append('Invalid password or email.')
 
     return render(request, "login.html", context={"errors": errors})
 

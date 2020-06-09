@@ -34,4 +34,8 @@
   src: url("./assets/fonts/Orpheus-Pro-Bold.otf") format("opentype");
 }
 
+.max-h-header {
+  max-height: 28rem;
+}
+
 @tailwind utilities;

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    {% include "navbar.html" %}
+
+    <img class="w-full max-h-header object-cover my-8" src="{{ article.image }}" alt="Article Image" />
+
+    <section class="w-full max-w-2xl flex flex-col mx-auto mb-8">
+        <h2 class="text-4xl text-black font-bold">{{ article.title }}</h2>
+
+        <section class="flex flex-col my-8">
+            <div class="flex items-center">
+                {% if article.author.profile.image|length > 0 %}
+                    <img class="w-10 h-10 rounded-full" src="{{ article.author.profile.image }}" alt="Avatar of Username" />
+                {% else %}
+                    <div class="w-10 h-10 rounded-full bg-gray-500" />
+                {% endif %}
+
+                <h2 class="ml-4 text-lg text-black font-bold">{{ article.author.username }}</h2>
+                {% if not is_current_user %}
+                    <button class="ml-4 px-4 py-2 border border-black text-sm">Follow</button>
+                {% endif %}
+            </div>
+        </section>
+
+        <p class="text-xl whitespace-pre-wrap">{{ article.body }}</p>
+
+        <section class="mt-8 flex items-center">
+            <img class="w-8 h-8" src="{% static '/assets/svg/heart_empty.svg' %}" alt="Favorite Icon" />
+            <span class="ml-4 text-sm">0 favorite(s)</span>
+
+            {% if is_current_user %}
+                <a href="{% url 'article_edit' article.slug %}" class="ml-4 px-4 py-2 border border-black text-sm">Edit article</a>
+            {% endif %}
+        </section>
+
+        <hr class="my-8">
+
+        <section class="flex items-center">
+            <div class="flex-shrink-0">
+                {% if user.profile.image|length > 0 %}
+                    <img class="w-20 h-20 rounded-full" src="{{ user.profile.image }}" alt="Avatar of Username" />
+                {% else %}
+                    <div class="w-20 h-20 rounded-full bg-gray-500" />
+                {% endif %}
+            </div>
+
+            <div class="flex flex-col ml-4 truncate">
+                <span class="text-sm">Written by</span>
+
+                <div class="flex items-center">
+                    <h2 class="text-3xl text-black font-bold">{{ user.username }}</h2>
+                    {% if not is_current_user %}
+                        <button class="ml-4 px-4 py-2 border border-black text-sm">Follow</button>
+                    {% endif %}
+                </div>
+
+                {% if user.profile.bio|length > 0 %}
+                    <p class="mt-2 text-lg">{{ user.profile.bio }}</p>
+                {% else %}
+                    <p class="mt-2 text-lg italic text-gray-500">This user has no bio</p>
+                {% endif %}
+            </div>
+        </section>
+
+    </section>
+
+{% endblock %}

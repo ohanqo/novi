@@ -1,0 +1,11 @@
+{
+  "name": "Novi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ohanqo/novi.git",
+  "author": "Antoine <gm.anqo@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "tailwindcss": "^1.4.6"
+  }
+}

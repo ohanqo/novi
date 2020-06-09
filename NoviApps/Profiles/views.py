@@ -28,7 +28,7 @@ def on_profile_edit(request, user_id):
         request.user.profile.bio = request.POST['bio']
         request.user.profile.image = request.POST['image']
         request.user.profile.save()
-        print("Save")
+
         return render(request, "profile_edit.html", context={"user": request.user, "is_current_user": True})
     else:
         return render(request, "profile_edit.html", context={"user": request.user, "is_current_user": True, "errors": ["Form is not valid"]})
