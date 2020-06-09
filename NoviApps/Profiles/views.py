@@ -12,10 +12,10 @@ def profile(request, user_id):
         return on_profile_edit(request, user_id)
 
     if request.user.id == user_id:
-        return render(request, "profile_edit.html", context={"user": request.user, "is_current_user": True})
+        return render(request, "profile_edit.html", context={"user": request.user, "current_user": request.user, "is_current_user": True})
 
     user = User.objects.get(id=user_id)
-    return render(request, "profile.html", context={"user": user, "is_current_user": False})
+    return render(request, "profile.html", context={"user": user, "current_user": request.user, "is_current_user": False})
 
 
 def on_profile_edit(request, user_id):
