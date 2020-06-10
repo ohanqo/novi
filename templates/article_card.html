@@ -1,0 +1,22 @@
+{% load static %}
+
+<div class="w-full border px-8 py-4 flex flex-col">
+    <a href="{% url 'article_show' article.slug %}" class="font-bold text-2xl">{{ article.title }}</a>
+
+    <div class="mt-4 flex justify-between items-center">
+        <div class="flex items-center">
+            <img class="w-4 h-4" src="{% static '/assets/svg/heart_empty.svg' %}" alt="Favorite Icon" />
+            <span class="ml-2 text-sm">{{ article.favorited_by.count}} favorite(s)</span>
+        </div>
+
+        <a href="{% url 'profile' article.author.id %}" class="flex items-center">
+            <h2 class="bold mr-2">{{ article.author.username }}</h2>
+
+            {% if article.author.profile.image|length > 0 %}
+                <img class="w-8 h-8 rounded-full" src="{{ article.author.profile.image }}" alt="Avatar of Username" />
+            {% else %}
+                <div class="w-8 h-8 rounded-full bg-gray-500"></div>
+            {% endif %}
+        </a>
+    </div>
+</div>

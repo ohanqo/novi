@@ -10,14 +10,24 @@ from .models import Article
 
 
 def index(request):
-    return render(request, "index.html", context={"current_user": request.user})
+    articles = Article.objects.order_by('-id')
+    return render(request, "index.html", context={"current_user": request.user, "articles": articles})
 
 
 def show(request, slug):
     article = Article.objects.get(slug=slug)
+    favorites_count = article.favorited_by.count()
     is_current_user = article.author.id == request.user.id
-    is_following = request.user.profile.is_following(article.author.profile)
-    return render(request, "article.html", context={"article": article, "current_user": request.user, "user": article.author,  "is_current_user": is_current_user, "is_following": is_following})
+
+    if request.user.is_authenticated:
+        is_following = request.user.profile.is_following(
+            article.author.profile)
+        has_favorited = request.user.profile.has_favorited(article)
+    else:
+        is_following = False
+        has_favorited = False
+
+    return render(request, "article.html", context={"article": article, "current_user": request.user, "user": article.author,  "is_current_user": is_current_user, "is_following": is_following, "has_favorited": has_favorited, "favorites_count": favorites_count})
 
 
 @login_required(login_url="/login")
@@ -29,6 +39,24 @@ def delete(request, slug):
 
     article.delete()
     return redirect("/")
+
+
+@login_required(login_url="/login")
+def favorite(request, slug):
+    article = Article.objects.get(slug=slug)
+    profile = request.user.profile
+
+    profile.favorite(article)
+    return redirect(f'/article/{slug}')
+
+
+@login_required(login_url="/login")
+def unfavorite(request, slug):
+    article = Article.objects.get(slug=slug)
+    profile = request.user.profile
+
+    profile.unfavorite(article)
+    return redirect(f'/article/{slug}')
 
 
 @login_required(login_url="/login")
@@ -45,15 +73,15 @@ def new(request):
             slug = slugify(title)
 
             if Article.objects.filter(slug=slug).exists():
-                return render(request, "article_new.html", context={"errors": ["This title is not available"]})
+                return render(request, "article_new.html", context={"errors": ["This title is not available"], "current_user": request.user})
 
             Article(slug=slug, title=title, image=image,
                     body=body, author=request.user).save()
-            return render(request, "article_new.html", context={"success": ["Done!"]})
+            return render(request, "article_new.html", context={"success": ["Done!"], "current_user": request.user})
         else:
             errors.append("Form is not valid")
 
-    return render(request, "article_new.html", context={"errors": errors})
+    return render(request, "article_new.html", context={"errors": errors, "current_user": request.user})
 
 
 @login_required(login_url="/login")
@@ -80,7 +108,7 @@ def edit(request, slug):
             if article.title == title:
                 pass
             elif Article.objects.filter(slug=slug).exists():
-                return render(request, "article_new.html", context={"errors": ["This title is not available"]})
+                return render(request, "article_new.html", context={"errors": ["This title is not available"], "current_user": request.user})
 
             article.slug = slug
             article.title = title
@@ -92,4 +120,4 @@ def edit(request, slug):
         else:
             errors.append("Form is not valid")
 
-    return render(request, "article_edit.html", context={"article": article, "errors": errors})
+    return render(request, "article_edit.html", context={"article": article, "errors": errors, "current_user": request.user})

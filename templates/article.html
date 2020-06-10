@@ -15,10 +15,10 @@
                 {% if article.author.profile.image|length > 0 %}
                     <img class="w-10 h-10 rounded-full" src="{{ article.author.profile.image }}" alt="Avatar of Username" />
                 {% else %}
-                    <div class="w-10 h-10 rounded-full bg-gray-500" />
+                    <div class="w-10 h-10 rounded-full bg-gray-500"></div>
                 {% endif %}
 
-                <h2 class="ml-4 text-lg text-black font-bold">{{ article.author.username }}</h2>
+                <a href="{% url 'profile' article.author.id %}" class="ml-4 text-lg text-black font-bold">{{ article.author.username }}</a>
                 {% if not is_current_user %}
                     {% include 'follow_button.html' %}
                 {% endif %}
@@ -28,8 +28,16 @@
         <p class="text-xl whitespace-pre-wrap">{{ article.body }}</p>
 
         <section class="mt-8 flex items-center">
-            <img class="w-8 h-8" src="{% static '/assets/svg/heart_empty.svg' %}" alt="Favorite Icon" />
-            <span class="ml-4 text-sm">0 favorite(s)</span>
+            {% if has_favorited %}
+                <a href="{% url 'article_unfavorite' article.slug %}">
+                    <img class="w-8 h-8" src="{% static '/assets/svg/heart_fill.svg' %}" alt="Favorite Icon" />
+                </a>
+            {%  else %}
+                <a href="{% url 'article_favorite' article.slug %}">
+                    <img class="w-8 h-8" src="{% static '/assets/svg/heart_empty.svg' %}" alt="Favorite Icon" />
+                </a>
+            {%  endif %}
+            <span class="ml-4 text-sm">{{ favorites_count}} favorite(s)</span>
 
             {% if is_current_user %}
                 <a href="{% url 'article_edit' article.slug %}" class="ml-4 px-4 py-2 border border-black text-sm">Edit article</a>
@@ -43,7 +51,7 @@
                 {% if user.profile.image|length > 0 %}
                     <img class="w-20 h-20 rounded-full" src="{{ user.profile.image }}" alt="Avatar of Username" />
                 {% else %}
-                    <div class="w-20 h-20 rounded-full bg-gray-500" />
+                    <div class="w-20 h-20 rounded-full bg-gray-500"></div>
                 {% endif %}
             </div>
 
@@ -51,7 +59,7 @@
                 <span class="text-sm">Written by</span>
 
                 <div class="flex items-center">
-                    <h2 class="text-3xl text-black font-bold">{{ user.username }}</h2>
+                    <a href="{% url 'profile' article.author.id %}" class="text-3xl text-black font-bold">{{ user.username }}</a>
                     {% if not is_current_user %}
                         {% include 'follow_button.html' %}
                     {% endif %}

@@ -8,4 +8,8 @@ urlpatterns = [
     path("article/<slug:slug>", views.show, name="article_show"),
     path("article/<slug:slug>/edit", views.edit, name="article_edit"),
     path("article/<slug:slug>/delete", views.delete, name="article_delete"),
+    path("article/<slug:slug>/favorite",
+         views.favorite, name="article_favorite"),
+    path("article/<slug:slug>/unfavorite",
+         views.unfavorite, name="article_unfavorite"),
 ]

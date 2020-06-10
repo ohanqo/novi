@@ -38,4 +38,8 @@
   max-height: 28rem;
 }
 
+.max-h-first {
+  max-height: 20rem;
+}
+
 @tailwind utilities;

@@ -2,4 +2,22 @@
 
 {% block content %}
     {% include "navbar.html" %}
+
+    <section class="flex flex-col max-w-xl mx-auto mt-8">
+        {% for article in articles %}
+            {% if forloop.counter == 1 %}
+                <a href="{% url 'article_show' article.slug %}">
+                    <img class="w-full max-h-first object-cover border border-b-0" src="{{ article.image }}" alt="Article Image" />
+                </a>
+            {% endif %}
+
+            {% include 'article_card.html' %}
+
+            <span class="block my-2"></span>
+
+        {% empty %}
+            <h2 class="text-3xl self-center mt-32">There is no article…</h2>
+        {% endfor %}
+    </section>
+
 {% endblock %}
