@@ -1,5 +1,5 @@
 module.exports = {
-  purge: [],
+  purge: ["./templates/**/*.html"],
   theme: {
     fontFamily: {
       main: ["Orpheus"],
