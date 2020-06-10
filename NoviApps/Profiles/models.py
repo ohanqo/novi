@@ -23,3 +23,15 @@ class Profile(models.Model):
         'Articles.Article',
         related_name='favorited_by'
     )
+
+    def follow(self, profile):
+        self.follows.add(profile)
+
+    def unfollow(self, profile):
+        self.follows.remove(profile)
+
+    def is_following(self, profile):
+        return self.follows.filter(pk=profile.pk).exists()
+
+    def is_followed_by(self, profile):
+        return self.followed_by.filter(pk=profile.pk).exists()

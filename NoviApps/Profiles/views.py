@@ -2,9 +2,10 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from .forms import EditProfileForm
+from .models import Profile
 
 
 def profile(request, user_id):
@@ -15,7 +16,9 @@ def profile(request, user_id):
         return render(request, "profile_edit.html", context={"user": request.user, "current_user": request.user, "is_current_user": True})
 
     user = User.objects.get(id=user_id)
-    return render(request, "profile.html", context={"user": user, "current_user": request.user, "is_current_user": False})
+    is_following = request.user.profile.is_following(user.profile)
+
+    return render(request, "profile.html", context={"user": user, "current_user": request.user, "is_following": is_following, "is_current_user": False})
 
 
 def on_profile_edit(request, user_id):
@@ -32,3 +35,24 @@ def on_profile_edit(request, user_id):
         return render(request, "profile_edit.html", context={"user": request.user, "is_current_user": True})
     else:
         return render(request, "profile_edit.html", context={"user": request.user, "is_current_user": True, "errors": ["Form is not valid"]})
+
+
+def follow(request, followee_id):
+    follower = request.user.profile
+    followee = Profile.objects.get(user_id=followee_id)
+
+    if follower.id == followee.id:
+        redirect("/")
+
+    follower.follow(followee)
+
+    return redirect(f'/profile/{request.user.id}')
+
+
+def unfollow(request, follower_id):
+    follower = request.user.profile
+    followee = Profile.objects.get(user_id=follower_id)
+
+    follower.unfollow(followee)
+
+    return redirect(f'/profile/{request.user.id}')

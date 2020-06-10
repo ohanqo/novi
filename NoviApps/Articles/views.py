@@ -10,13 +10,14 @@ from .models import Article
 
 
 def index(request):
-    return render(request, "index.html", context={"user": request.user})
+    return render(request, "index.html", context={"current_user": request.user})
 
 
 def show(request, slug):
     article = Article.objects.get(slug=slug)
     is_current_user = article.author.id == request.user.id
-    return render(request, "article.html", context={"article": article, "is_current_user": is_current_user})
+    is_following = request.user.profile.is_following(article.author.profile)
+    return render(request, "article.html", context={"article": article, "current_user": request.user, "user": article.author,  "is_current_user": is_current_user, "is_following": is_following})
 
 
 @login_required(login_url="/login")

@@ -12,7 +12,7 @@
 
             <button v-if="isMenuOpen" @click="isMenuOpen = false" tabindex="-1" class="fixed inset-0 h-full w-full bg-black opacity-25 cursor-default"></button>
             <nav :class="isMenuOpen ? 'block' : 'hidden'" class="absolute bg-white block mt-12 pl-2 py-4 right-0 rounded w-40 z-10">
-                <a href="/profile/{{ user.id }}" class="block text-lg py-2 text-left hover:underline">Profile</a>
+                <a href="/profile/{{ current_user.id }}" class="block text-lg py-2 text-left hover:underline">Profile</a>
                 <a href="/logout" class="block text-lg py-2 text-left hover:underline">Logout</a>
             </nav>
         </div>

@@ -1,0 +1,5 @@
+{% if is_following %}
+    <a href="{% url 'unfollow' user.id %}" class="ml-4 px-4 py-2 border border-black text-sm">Unfollow</a>
+{% else %}
+    <a href="{% url 'follow' user.id %}" class="ml-4 px-4 py-2 border border-black text-sm">Follow</a>
+{% endif %}

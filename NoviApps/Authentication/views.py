@@ -12,7 +12,7 @@ from .forms import RegisterForm
 
 def register(request):
     if request.user.is_authenticated:
-        return render(request, "index.html")
+        return redirect("/")
 
     if request.method == "POST":
         form = RegisterForm(request.POST)
@@ -32,7 +32,7 @@ def register(request):
 
 def connect(request):
     if request.user.is_authenticated:
-        return render(request, "index.html")
+        return redirect("/")
 
     errors = []
 

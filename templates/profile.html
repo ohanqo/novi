@@ -9,7 +9,7 @@
                 <div class="flex items-center">
                     <h2 class="text-3xl text-black font-bold">{{ user.username }}</h2>
                     {% if not is_current_user %}
-                        <button class="ml-4 px-4 py-2 border border-black text-sm">Follow</button>
+                        {% include 'follow_button.html' %}
                     {% endif %}
                 </div>
 
