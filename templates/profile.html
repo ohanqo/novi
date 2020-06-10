@@ -13,6 +13,8 @@
                     {% endif %}
                 </div>
 
+                <p class="text-sm">{{ user.profile.followed_by.count }} follower(s)</p>
+
                 {% if user.profile.bio|length > 0 %}
                     <p class="mt-2 text-lg">{{ user.profile.bio }}</p>
                 {% else %}
@@ -34,6 +36,23 @@
 
         {% block edit_profile %}
         {% endblock %}
+
+        <section class="mt-24">
+            <h2 class="text-2xl text-black">Articles</h2>
+            <hr>
+
+            <div class="flex flex-col mt-8">
+                {% for article in user.articles.all %}
+
+                    {% include 'article_card.html' %}
+
+                    <span class="block my-2"></span>
+
+                {% empty %}
+                    <h2 class="text-xl self-center mt-8">There is no article…</h2>
+                {% endfor %}
+            </div>
+        </section>
     </main>
 
 {% endblock %}
