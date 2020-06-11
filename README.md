@@ -1,4 +1,4 @@
-![](https://github.com/ohanqo/novi/blob/master/docs/article.png)
+![](https://github.com/ohanqo/novi/blob/master/docs/article.jpg)
 
 <br>
 
@@ -60,10 +60,10 @@ Novi est un site web visant à partager des articles sur le monde de la tech. Il
 
 Pour rédiger un article et suivre une personne, il faut au préalable avoir crée un compte. Une fois cet action effectuée, l'utilisateur est redirigé sur la page d'accueil contenant les derniers articles parus.
 
-![](https://github.com/ohanqo/novi/blob/master/docs/home.png)
+![](https://github.com/ohanqo/novi/blob/master/docs/home.jpg)
 
 L'utilisateur peut se rendre sur son profil et compléter ce dernier. Il peut ajouter une biographie ainsi qu'un lien vers un avatar le représentant. Lorsqu'il accède à un profil d'une autre personne, il peut visualiser les informations de cette denière, la liste de ses articles et il peut la suivre en cliquant sur le bouton follow.
 
-![](https://github.com/ohanqo/novi/blob/master/docs/profile.png)
+![](https://github.com/ohanqo/novi/blob/master/docs/profile.jpg)
 
 La rédaction d'un article s'effectue en cliquant sur le bouton `Write an article` présent dans la barre de navigation. Cette page comporte trois champs qui sont obligatoires: titre, image et texte. Le titre doit être unique parmis la liste de tous les articles car il permet de génerer un slug, ce qui augment le référencement. Une fois l'article crée, il se retrouve directement en premier sur la page d'accueil.
