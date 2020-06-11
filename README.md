@@ -8,6 +8,8 @@
     Réalisé avec Django, Tailwind et VueJS
     <br />  
     Basé sur le site Medium
+    <br />
+    http://anqo.eu.pythonanywhere.com/
 </p>
 
 <br>
